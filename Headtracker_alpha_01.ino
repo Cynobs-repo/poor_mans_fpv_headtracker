@@ -204,12 +204,16 @@ void loop(){
   {
     diff_Center_azimuth = filtered_azimuth - ViewCenter_azimuth;
     diff_Center_nick = filtered_nick - ViewCenter_nick;
+    if(diff_Center_azimuth > 90){diff_Center_azimuth = 90;} 
+    if(diff_Center_azimuth < -90){diff_Center_azimuth = -90;} 
+    if(diff_Center_nick > 90){diff_Center_nick = 90;} 
+    if(diff_Center_nick < -90){diff_Center_nick = -90;} 
     ppm_pos_azimuth = map(diff_Center_azimuth, -90, 90, ppm_lowerEnd_azimuth, ppm_upperEnd_azimuth);
     ppm_pos_nick = map(diff_Center_nick, -90, 90, ppm_lowerEnd_nick, ppm_upperEnd_nick);
-    if(ppm_pos_azimuth > ppm_upperEnd_azimuth){ppm_pos_azimuth = ppm_upperEnd_azimuth;}
-    if(ppm_pos_azimuth < ppm_lowerEnd_azimuth){ppm_pos_azimuth = ppm_lowerEnd_azimuth;}
-    if(ppm_pos_nick > ppm_upperEnd_nick){ppm_pos_nick = ppm_upperEnd_nick;}
-    if(ppm_pos_nick < ppm_lowerEnd_nick){ppm_pos_nick = ppm_lowerEnd_nick;}
+    //if(ppm_pos_azimuth > ppm_upperEnd_azimuth){ppm_pos_azimuth = ppm_upperEnd_azimuth;}
+    //if(ppm_pos_azimuth < ppm_lowerEnd_azimuth){ppm_pos_azimuth = ppm_lowerEnd_azimuth;}
+    //if(ppm_pos_nick > ppm_upperEnd_nick){ppm_pos_nick = ppm_upperEnd_nick;}
+    //if(ppm_pos_nick < ppm_lowerEnd_nick){ppm_pos_nick = ppm_lowerEnd_nick;}
     ppmEncoder.setChannel(6, ppm_pos_azimuth);
     ppmEncoder.setChannel(7, ppm_pos_nick);
 
